@@ -25,7 +25,7 @@ module_init(modA_init);
 module_exit(modA_exit);
 EXPORT_SYMBOL(my_flagCount);
 
-MODULE_AUTHOR("Shivshankar Manivasagam");
+MODULE_AUTHOR("Author");
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Module dependency");
 
