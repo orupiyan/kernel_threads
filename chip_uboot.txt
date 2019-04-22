@@ -1,0 +1,37 @@
+
+# Set Build Environment for uboot compilation . envSetup_toolchain.bash
+# Check if compilation enviornment is set properly echo $PREFIX
+
+* Install device tree compiler
+sudo apt-get install device-tree-compiler
+
+* Get uboot code from the next thing branch
+git clone -b next git://git.denx.de/u-boot-sunxi.git
+cd u-boot-sunxi
+
+OR
+
+git clone http://github.com/NextThingCo/CHIP-u-boot
+cd CHIP-u-boot
+
+make ARCH=arm CROSS_COMPILE=${TARGET}- CHIP_defconfig
+
+# Check if dot config was created
+ls .config
+
+# Configuration utility menuconfig for u-boot 
+make CROSS_COMPILE=${TARGET}- menuconfig
+
+# Compile the u-boot source code 
+make CROSS_COMPILE=${TARGET}-
+
+# Compiler will produced following images 
+- "u-boot.bin" is a raw binary image 
+- "u-boot" is an image in ELF binary format 
+- "u-boot.srec" is in Motorola S-Record format 
+- "u-boot.lds" ASCII assembler program text
+
+If everything compiled fine, you’ll have the u-boot.bin file in the root of 
+the u-boot tree, and sunxi-spl.bin in the spl/ directory.
+
+

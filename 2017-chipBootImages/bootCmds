@@ -1,0 +1,30 @@
+IMAGE_DIR='/home/parallels/EmbeddedLinux/Assignments/Assignment3/2017-chipBootImages'
+sudo ./fel version
+sudo ./fel spl ${IMAGE_DIR}/sunxi-spl.bin
+sudo ./fel -p write 0x4a000000 ${IMAGE_DIR}/u-boot-dtb.bin
+sudo ./fel -p write 0x42000000 ${IMAGE_DIR}/zImage
+sudo ./fel -p write 0x43000000 ${IMAGE_DIR}/sun5i-r8-chip.dtb
+sudo ./fel -p write 0x43100000 ${IMAGE_DIR}/uboot-env.scr
+sudo ./fel -p write 0x43300000 ${IMAGE_DIR}/initramfs-NEW.cpio.gz.uImage
+sudo ./fel exe 0x4a000000
+
+minicom -b 115200 -o -D /dev/ttyUSB0
+sudo screen /dev/ttyUSB0 115200s
+
+gnome-terminal -x sh -c "sudo screen /dev/ttyUSB0 115200s; bash"
+
+sudo nmcli device wifi list
+sudo nmcli device wifi connect 'Enrendrum16' password 'ShivGee119' ifname wlan0
+
+scp parallels@192.168.0.108:/home/parallels/buildArmlinux/myApp/testTools /home/chip 
+
+sudo iptables -F
+sudo iptables -X
+sudo iptables -t nat -F
+sudo iptables -t nat -X
+sudo iptables -t mangle -F
+sudo iptables -t mangle -X
+sudo iptables -P INPUT ACCEPT
+sudo iptables -P OUTPUT ACCEPT
+sudo iptables -P FORWARD ACCEPT
+
