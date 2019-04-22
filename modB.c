@@ -44,7 +44,7 @@ static void __exit modB_exit(void)
 module_init(modB_init);
 module_exit(modB_exit);
 
-MODULE_AUTHOR("Shivshankar Manivasagam");
+MODULE_AUTHOR("Author");
 MODULE_LICENSE("GPL");
 MODULE_DESCRIPTION("Module dependency");
 
